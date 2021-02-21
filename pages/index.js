@@ -4,11 +4,11 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div>
-      <h1>Homepage</h1>
-      <p>Ho ho ho</p>
+    <div className={styles.title}>
+      <h1 className={styles.text}>Homepage</h1>
+      <p className={styles.text}>Ho ho ho</p>
       <Link href ="/ninjas">
-        <a>See Ninja Listing</a>
+        <a className={styles.btn}>See Ninja Listing</a>
       </Link>
     </div>
   )
