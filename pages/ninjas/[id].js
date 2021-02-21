@@ -1,26 +1,44 @@
+//loading page route and individual id and person 
 
-//exporting paths from the api before it is rendered
+// job of the function is to let know next how many pages we need for internal data
+// generates html pages for our app. 
 
-export const getStaticProps = async () => {
+export const getStaticPaths = async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
     const data = await res.json();
-    const paths = data.map(ninja => { 
-        //accessing params property and the id object converting it to string
-        return { 
-            params: { id: ninja.id.toString()} 
-        }
+  
+    // map data to an array of path objects with params (id)
+    const paths = data.map(ninja => {
+      return {
+        params: { id: ninja.id.toString() }
+      }
     })
+  
     return {
-        paths, 
-        fallback: false
+      paths,
+      fallback: false
     }
   }
-
-const Details = () => { 
-    return ( 
-        <div>
-            <h1>Details Page</h1>
-        </div>
-    )
-}
-export default Details; 
+  
+  export const getStaticProps = async (context) => {
+    const id = context.params.id;
+    const res = await fetch('https://jsonplaceholder.typicode.com/users/' + id);
+    const data = await res.json();
+  
+    return {
+      props: { ninja: data }
+    }
+  }
+  
+  const Details = ({ ninja }) => {
+    return (
+      <div>
+        <h1>{ ninja.name }</h1>
+        <p>{ ninja.email }</p>
+        <p>{ ninja.website }</p>
+        <p>{ ninja.address.city }</p>
+      </div>
+    );
+  }
+  
+  export default Details;
