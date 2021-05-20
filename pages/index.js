@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
       <div className={styles.title}>
         <h1 className={styles.text}>Namaste</h1>
-        <Link href ="/ninjas">
+        <Link href ="/blogs">
           <a className={styles.btn}>See my work</a>
         </Link>
       </div>
